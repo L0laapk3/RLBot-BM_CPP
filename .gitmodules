@@ -1,0 +1,3 @@
+[submodule "RLBotBMLib"]
+	path = RLBotBMLib
+	url = git@github.com:L0laapk3/RLBot-BM_Lib.git
