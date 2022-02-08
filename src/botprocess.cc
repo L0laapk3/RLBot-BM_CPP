@@ -43,7 +43,7 @@ void BotProcess::BotThread() const {
         //       bot->GetOutput(gametickpacket),
         //       bot->index); /// TODO: Report status to user.
 			if (rlbot::bmInterface)
-				rlbot::bmInterface->setBotInput(bot->index, bot->GetOutput(gametickpacket));
+				rlbot::bmInterface->setBotInput(bot->GetOutput(gametickpacket), bot->index);
 
           Interface::Free(fieldInfoData.ptr);
           Interface::Free(ballPredictionData.ptr);
