@@ -1,16 +1,14 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.9.4)
 project(RLBotBMCPP LANGUAGES CXX)
 
 file(GLOB source_files ${PROJECT_SOURCE_DIR}/src/*.cc)
 
-file(GLOB header_files ${PROJECT_SOURCE_DIR}/inc/*.h)
-
 add_subdirectory(RLBotBMLib)
 
-add_library(RLBotBMCPP STATIC ${source_files} ${header_files})
+add_library(RLBotBMCPP STATIC ${source_files})
 
-target_include_directories(RLBotBMCPP PRIVATE RLBotBMLib/src)
-target_link_libraries(RLBotBMCPP RLBotBMLib)
+include_directories(${PROJECT_SOURCE_DIR}/RLBotBMLib/src)
+target_link_libraries(RLBotBMCPP PUBLIC RLBotBMLib)
 
 target_include_directories(RLBotBMCPP PUBLIC inc lib/inc)
 target_compile_features(RLBotBMCPP PUBLIC cxx_std_17)

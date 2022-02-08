@@ -1,5 +1,7 @@
 #pragma once
 
+#include "shared/SharedObjects.h"
+
 namespace rlbot {
 struct Controller {
   float throttle;
@@ -11,5 +13,19 @@ struct Controller {
   bool boost;
   bool handbrake;
   bool useItem;
+
+  operator RLBotBM::Shared::ControllerInput() const {
+	return {
+		.throttle = throttle,
+		.steer = steer,
+		.pitch = pitch,
+		.yaw = yaw,
+		.roll = roll,
+		.handbrake = handbrake,
+		.jump = jump,
+		.boost = boost,
+		// .useItem = useItem,
+	};
+  }
 };
 } // namespace rlbot

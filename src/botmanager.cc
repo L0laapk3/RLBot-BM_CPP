@@ -1,4 +1,5 @@
 #include "rlbot/botmanager.h"
+#include "rlbot/bmInterface.h"
 #include <chrono>
 #include <thread>
 
@@ -18,6 +19,9 @@ void BotManager::StartBotServer(uint16_t port) {
 
 void BotManager::RecieveMessage(Message message) {
   using namespace std::chrono_literals;
+  if (!rlbot::bmInterface)
+	  rlbot::bmInterface = std::make_unique<RLBotBM::RLBotBM>();
+  
   if (message.command == Command::Add) {
     if (!Interface::IsInterfaceLoaded()) {
       Interface::LoadInterface(message.dll_dir + platform::fileSeperator +

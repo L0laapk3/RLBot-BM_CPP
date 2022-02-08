@@ -2,6 +2,8 @@
 
 #include "rlbot/packets.h"
 #include "rlbot/platform.h"
+#include "rlbot/bmInterface.h"
+#include "shared/SharedObjects.h"
 
 namespace rlbot {
 void BotProcess::Start() {
@@ -37,9 +39,11 @@ void BotProcess::BotThread() const {
         // The fieldinfo or ball prediction might not have been set up by the
         // framework yet.
         if (fieldInfoData.size > 4 && ballPredictionData.size > 4) {
-          int status = Interface::SetBotInput(
-              bot->GetOutput(gametickpacket),
-              bot->index); /// TODO: Report status to user.
+        //   int status = Interface::SetBotInput(
+        //       bot->GetOutput(gametickpacket),
+        //       bot->index); /// TODO: Report status to user.
+			if (rlbot::bmInterface)
+				rlbot::bmInterface->setBotInput(bot->index, bot->GetOutput(gametickpacket));
 
           Interface::Free(fieldInfoData.ptr);
           Interface::Free(ballPredictionData.ptr);
