@@ -1,5 +1,5 @@
-# RLBotCPP
+# RLBot-BM_CPP
 
-C++ client for the [RLBot framework](https://github.com/RLBot/RLBot).
+C++ client for the RLBot-BM framework.
 
-### Note: The example bot has been moved to https://github.com/kipje13/CPPExampleBot
+See **https://github.com/L0laapk3/RLBot-BM_Lib**
