@@ -20,16 +20,17 @@ void BotProcess::BotThread() const {
   float lasttime = 0;
 
   // Don't start before the interface is ready.
-  while (!Interface::IsInitialized()) {
+  while (!Interface::IsInitialized())
     platform::SleepMilliseconds(1);
-  }
+  while (!rlbot::bmInterface)
+    platform::SleepMilliseconds(1);
 
   while (running) {
     ByteBuffer flatbufferData = Interface::UpdateLiveDataPacketFlatbuffer();
 
     // Don't try to read the packets when they are very small.
     if (flatbufferData.size > 4) {
-		GameTickPacket gametickpacket = GameTickPacket(flatbufferData);
+      GameTickPacket gametickpacket = GameTickPacket(flatbufferData);
 
       // Only run the bot when we recieve a new packet.
       if (lasttime != gametickpacket->gameInfo()->secondsElapsed()) {
@@ -42,8 +43,8 @@ void BotProcess::BotThread() const {
         //   int status = Interface::SetBotInput(
         //       bot->GetOutput(gametickpacket),
         //       bot->index); /// TODO: Report status to user.
-			if (rlbot::bmInterface)
-				rlbot::bmInterface->setBotInput(bot->GetOutput(gametickpacket), bot->index);
+          if (rlbot::bmInterface)
+            rlbot::bmInterface->setBotInput(bot->GetOutput(gametickpacket), bot->index);
 
           Interface::Free(fieldInfoData.ptr);
           Interface::Free(ballPredictionData.ptr);
@@ -57,7 +58,7 @@ void BotProcess::BotThread() const {
       platform::SleepMilliseconds(100);
     }
 
-	Interface::Free(flatbufferData.ptr);
+  Interface::Free(flatbufferData.ptr);
   }
 }
 } // namespace rlbot
