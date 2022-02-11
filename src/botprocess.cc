@@ -3,7 +3,10 @@
 #include "rlbot/packets.h"
 #include "rlbot/platform.h"
 #include "rlbot/bmInterface.h"
-#include "shared/SharedObjects.h"
+#include "RLBotBM.h"
+
+#include <iostream>
+
 
 namespace rlbot {
 void BotProcess::Start() {
@@ -21,12 +24,18 @@ void BotProcess::BotThread() const {
 	while (!Interface::IsInitialized())
 		platform::SleepMilliseconds(1);
 
-	GameState state;
-	RLBot::bmInterface->getCurrentState(state);
-	while (running) {
-		rlbot::bmInterface->setBotInput(bot->GetInput(state), bot->index);
+	RLBotBM::GameState state;
+	bmInterface->getCurrentState(state);
 
-		RLBot::bmInterface->waitNextTick(state);
+	while (state.numCars <= bot->index) // wait for our bot to spawn
+		bmInterface->waitNextTick(state);
+
+	std::cout << state.numCars << std::endl;
+
+	while (running) {
+		bmInterface->setBotInput(bot->GetOutput(state), bot->index);
+
+		bmInterface->waitNextTick(state);
 	}
 }
 

@@ -2,6 +2,7 @@
 #include "rlbot/interface.h"
 #include "rlbot/packets.h"
 #include "rlbot/rlbot_generated.h"
+#include "RLBotBM.h"
 
 #include <string>
 
@@ -17,7 +18,7 @@ public:
 
   Bot(int index, int team, std::string name);
   virtual ~Bot() {}
-  virtual Controller GetOutput(GameState& state) = 0;
+  virtual RLBotBM::ControllerInput GetOutput(RLBotBM::GameState& state) = 0;
 
   BallPrediction GetBallPrediction();
   FieldInfo GetFieldInfo();
