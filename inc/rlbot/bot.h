@@ -17,7 +17,7 @@ public:
 
   Bot(int index, int team, std::string name);
   virtual ~Bot() {}
-  virtual Controller GetOutput(GameTickPacket gametickpacket) = 0;
+  virtual Controller GetOutput(GameState& state) = 0;
 
   BallPrediction GetBallPrediction();
   FieldInfo GetFieldInfo();
