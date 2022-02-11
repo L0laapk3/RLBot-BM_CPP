@@ -3,12 +3,12 @@ project(RLBotBMCPP LANGUAGES CXX)
 
 file(GLOB source_files ${PROJECT_SOURCE_DIR}/src/*.cc)
 
-add_subdirectory(RLBotBMLib)
+add_subdirectory(RLBotBM)
 
 add_library(RLBotBMCPP STATIC ${source_files})
 
-include_directories(${PROJECT_SOURCE_DIR}/RLBotBMLib/src)
-target_link_libraries(RLBotBMCPP PUBLIC RLBotBMLib)
+include_directories(${PROJECT_SOURCE_DIR}/RLBotBM/src)
+target_link_libraries(RLBotBMCPP PUBLIC RLBotBM)
 
 target_include_directories(RLBotBMCPP PUBLIC inc lib/inc)
 target_compile_features(RLBotBMCPP PUBLIC cxx_std_17)
