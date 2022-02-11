@@ -24,7 +24,7 @@ void BotProcess::BotThread() const {
 	GameState state;
 	RLBot::bmInterface->getCurrentState(state);
 	while (running) {
-		rlbot::bmInterface->setBotInput(bot->GetInput(state), state.my_car_index);
+		rlbot::bmInterface->setBotInput(bot->GetInput(state), bot->index);
 
 		RLBot::bmInterface->waitNextTick(state);
 	}
