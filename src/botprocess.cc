@@ -29,9 +29,7 @@ void BotProcess::BotThread() const {
 
 	while (state.numCars <= bot->index) // wait for our bot to spawn
 		bmInterface->waitNextTick(state);
-
-	std::cout << state.numCars << std::endl;
-
+		
 	while (running) {
 		bmInterface->setBotInput(bot->GetOutput(state), bot->index);
 
