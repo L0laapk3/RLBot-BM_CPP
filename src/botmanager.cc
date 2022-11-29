@@ -19,8 +19,13 @@ void BotManager::StartBotServer(uint16_t port) {
 
 void BotManager::RecieveMessage(Message message) {
   using namespace std::chrono_literals;
-  if (!rlbot::bmInterface)
-	  rlbot::bmInterface = std::make_unique<RLBotBM::RLBotBM>();
+	if (!rlbot::bmInterface)
+  		try {
+			rlbot::bmInterface = std::make_unique<RLBotBM::RLBotBM>();
+		} catch (RLBotBM::RLBotBMException& e) {
+			std::cerr << "RLBotBMException: " << e.what() << std::endl;
+			throw e;
+		}
   
   if (message.command == Command::Add) {
     if (!Interface::IsInterfaceLoaded()) {
