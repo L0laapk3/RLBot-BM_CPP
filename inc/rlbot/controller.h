@@ -14,7 +14,7 @@ struct Controller {
   bool handbrake;
   bool useItem;
 
-  operator RLBotBM::Shared::ControllerInput() const {
+  operator RLBotBM::ControllerInput() const {
 	return {
 		.throttle = throttle,
 		.steer = steer,
