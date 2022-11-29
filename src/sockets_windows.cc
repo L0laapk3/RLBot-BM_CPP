@@ -7,6 +7,7 @@
 
 #include <winsock2.h>
 #include <ws2tcpip.h>
+#include <stdexcept>
 
 #pragma comment(lib, "Ws2_32.lib")
 
@@ -49,14 +50,14 @@ ListenSocket ListenSocketCreate(uint16_t port) {
   if (listenSocket == INVALID_SOCKET) {
     printf("Error at socket(): %ld\n", WSAGetLastError());
     freeaddrinfo(result);
-    return ListenSocket{};
+    throw std::runtime_error("Error at socket(): %ld");
   }
 
   iResult = bind(listenSocket, result->ai_addr, (int)result->ai_addrlen);
   if (iResult == SOCKET_ERROR) {
     printf("bind failed with error: %d\n", WSAGetLastError());
     freeaddrinfo(result);
-    return ListenSocket{};
+    throw std::runtime_error("Error at socket(): %ld");
   }
 
   freeaddrinfo(result);
