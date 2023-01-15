@@ -8,7 +8,6 @@ add_subdirectory(RLBot-BM)
 
 add_library(${PROJECT_NAME} STATIC ${source_files})
 
-include_directories(${RLBOT-BM_DIR}/src)
 target_link_libraries(${PROJECT_NAME} PUBLIC RLBot-BM)
 
 target_include_directories(${PROJECT_NAME} PUBLIC inc lib/inc)
